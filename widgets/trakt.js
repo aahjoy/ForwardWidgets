@@ -10,7 +10,7 @@ WidgetMetadata = {
             params: [
                 {
                     name: "user_name",
-                    title: "用户名",
+                    title: "Tsungyiu",
                     type: "input",
                     description: "需在Trakt设置里打开隐私开关，未填写情况下接口不可用",
                 },
@@ -51,7 +51,7 @@ WidgetMetadata = {
             params: [
                 {
                     name: "cookie",
-                    title: "用户Cookie",
+                    title: "traktsession=SnVUUGKp79gtk7Dbhra7ieLw%2B26kZugAtHOvmUimiuv%2BdO332KkM5VS%2BPdRsuSJy6SuCFYF9YzmP3X%2BmZJAmUdtSowZftFsatktTu8NM%2BhqKyl3GaV68eXsAs0jVlKqh68txvL0Bb6IphFWCcILhpKxWX11IMmSwCJD6SwVErWsWAT3wAdciU8QVHzw2%2Fja1nTRLP6uekTSddjVZzfsmDg81sJQwnqVNkFLLAXcNxsdESHbht27X17Yr6FpmNEI8sA8N8%2BgkdHeQnsSv6T49KdG1KSh0QtRK%2BU3HmSt2KUzleTpJrfwchbNvKGa55s36ATSujFEqGo0VK1kS1oCMfu63iCnVNvg6ZSRfivuIVyrRuiowc0dkvw%2FHgZsmPpqNr41K6RSbxgcnbhG71J73vnJyzPU3tQKfVhbwMd99RQHvGwV8k0HyDX6UyNLtrw16ZUbjn%2FEKeisDqbgJQLM3C7L8UHDa8s83NSwRZDWCM7P0I6hzg7aUdL8pVP0wIjbSrmDTY%2B7cDzZhTy7GIlHRqWQ%3D--tIv1TSaC1plW2%2BUW--5%2Fh%2FiwiKRjNUBzvlvnzRkw%3D%3D; path=/; HttpOnly; SameSite=Lax",
                     type: "input",
                     description: "_traktsession=xxxx，未填写情况下接口不可用；可登陆网页后，通过loon，Qx等软件抓包获取Cookie",
                 },
@@ -84,7 +84,7 @@ WidgetMetadata = {
             params: [
                 {
                     name: "user_name",
-                    title: "用户名",
+                    title: "Tsungyiu",
                     type: "input",
                     description: "如：giladg，未填写情况下接口不可用",
                 },
