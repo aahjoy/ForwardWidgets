@@ -330,15 +330,20 @@ WidgetMetadata = {
           name: "mediaType",
           title: "类别",
           type: "enumeration",
+          value: "movie",
           enumOptions: [
+            { title: "电影", value: "movie" },
             { title: "剧集", value: "tv" },
-            { title: "电影", value: "movie" }
           ]
         },
         {
-          name: "genre",
+          name: "movieGenre",
           title: "类型",
           type: "enumeration",
+          belongTo: {
+            paramName: "mediaType",
+            value: ["movie"],
+          },
           enumOptions: [
             { title: "全部", value: "" },
             { title: "喜剧", value: "喜剧" },
@@ -359,7 +364,69 @@ WidgetMetadata = {
             { title: "武侠", value: "武侠" },
             { title: "纪录片", value: "纪录片" },
             { title: "短片", value: "短片" },
-
+          ]
+        },
+        {
+          name: "tvModus",
+          title: "形式",
+          type: "enumeration",
+          belongTo: {
+            paramName: "mediaType",
+            value: ["tv"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "电视剧", value: "电视剧" },
+            { title: "综艺", value: "综艺" },
+          ]
+        },
+        {
+          name: "tvGenre",
+          title: "类型",
+          type: "enumeration",
+          belongTo: {
+            paramName: "tvModus",
+            value: ["电视剧"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "喜剧", value: "喜剧" },
+            { title: "爱情", value: "爱情" },
+            { title: "悬疑", value: "悬疑" },
+            { title: "动画", value: "动画" },
+            { title: "武侠", value: "武侠" },
+            { title: "古装", value: "古装" },
+            { title: "家庭", value: "家庭" },
+            { title: "犯罪", value: "犯罪" },
+            { title: "科幻", value: "科幻" },
+            { title: "恐怖", value: "恐怖" },
+            { title: "历史", value: "历史" },
+            { title: "战争", value: "战争" },
+            { title: "动作", value: "动作" },
+            { title: "冒险", value: "冒险" },
+            { title: "传记", value: "传记" },
+            { title: "剧情", value: "剧情" },
+            { title: "奇幻", value: "奇幻" },
+            { title: "惊悚", value: "惊悚" },
+            { title: "灾难", value: "灾难" },
+            { title: "歌舞", value: "歌舞" },
+            { title: "音乐", value: "音乐" },
+          ]
+        },
+        {
+          name: "zyGenre",
+          title: "类型",
+          type: "enumeration",
+          belongTo: {
+            paramName: "tvModus",
+            value: ["综艺"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "真人秀", value: "真人秀" },
+            { title: "脱口秀", value: "脱口秀" },
+            { title: "音乐", value: "音乐" },
+            { title: "歌舞", value: "歌舞" },
           ]
         },
         {
@@ -398,12 +465,39 @@ WidgetMetadata = {
             { title: "2021", value: "2021" },
             { title: "2020年代", value: "2020年代" },
             { title: "2010年代", value: "2010年代" },
-            { title: "2000年代", value: "2000年代" }
-
+            { title: "2000年代", value: "2000年代" },
+            { title: "90年代", value: "90年代" },
+            { title: "80年代", value: "80年代" },
+            { title: "70年代", value: "70年代" },
+            { title: "60年代", value: "60年代" },
+            { title: "更早", value: "更早" },
           ]
         },
         {
-          name: "sortBy",
+          name: "platform",
+          title: "平台",
+          type: "enumeration",
+          belongTo: {
+            paramName: "mediaType",
+            value: ["tv"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "腾讯视频", value: "腾讯视频" },
+            { title: "爱奇艺", value: "爱奇艺" },
+            { title: "优酷", value: "优酷" },
+            { title: "湖南卫视", value: "湖南卫视" },
+            { title: "Netflix", value: "Netflix" },
+            { title: "HBO", value: "HBO" },
+            { title: "BBC", value: "BBC" },
+            { title: "NHK", value: "NHK" },
+            { title: "CBS", value: "CBS" },
+            { title: "NBC", value: "NBC" },
+            { title: "tvN", value: "tvN" },
+          ],
+        },
+        {
+          name: "sort_by",
           title: "排序",
           type: "enumeration",
           enumOptions: [
@@ -415,15 +509,100 @@ WidgetMetadata = {
         },
         {
           name: "tags",
-          title: "标签",
+          title: "自定义标签",
           type: "input",
-          description: "设置自定义标签，例如：丧尸"
+          description: "设置自定义标签，例如：丧尸,推理",
+          value: "",
+          placeholders: [
+            {
+              title: "空",
+              value: "",
+            },
+            {
+              title: "推理,悬疑",
+              value: "推理,悬疑",
+            },
+            {
+              title: "cult",
+              value: "cult",
+            },
+            {
+              title: "经典",
+              value: "经典",
+            },
+            {
+              title: "动作",
+              value: "动作",
+            },
+            {
+              title: "喜剧",
+              value: "喜剧",
+            },
+            {
+              title: "惊悚",
+              value: "惊悚",
+            },
+            {
+              title: "穿越",
+              value: "穿越",
+            },
+            {
+              title: "儿童",
+              value: "儿童",
+            },
+            {
+              title: "战争",
+              value: "战争",
+            },
+          ]
         },
         {
           name: "rating",
           title: "评分",
           type: "input",
-          description: "设置最低评分过滤，例如：6"
+          description: "设置最低评分过滤，例如：6",
+          placeholders: [
+            {
+              title: "0",
+              value: "0",
+            },
+            {
+              title: "1",
+              value: "1",
+            },
+            {
+              title: "2",
+              value: "2",
+            },
+            {
+              title: "3",
+              value: "3",
+            },
+            {
+              title: "4",
+              value: "4",
+            },
+            {
+              title: "5",
+              value: "5",
+            },
+            {
+              title: "6",
+              value: "6",
+            },
+            {
+              title: "7",
+              value: "7",
+            },
+            {
+              title: "8",
+              value: "8",
+            },
+            {
+              title: "9",
+              value: "9",
+            },
+          ]
         },
         {
           name: "offset",
@@ -433,7 +612,7 @@ WidgetMetadata = {
       ]
     },
   ],
-  version: "1.0.5",
+  version: "1.0.7",
   requiredVersion: "0.0.1",
   description: "解析豆瓣想看、在看、已看以及根据个人数据生成的个性化推荐【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd",
@@ -458,8 +637,12 @@ async function loadInterestItems(params = {}) {
   console.log("请求结果:", response.data);
   if (response.data && response.data.interests) {
     const items = response.data.interests;
-    const doubanIds = items.filter((item) => item.subject.id != null).map((item) => ({
-      id: item.subject.id,
+    const doubanIds = [...new Set(
+      items
+        .filter((item) => item.subject.id != null)
+        .map((item) => item.subject.id)
+    )].map((id) => ({
+      id,
       type: "douban",
     }));
     return doubanIds;
@@ -545,7 +728,18 @@ async function fetchImdbItems(scItems) {
 
   // 等待所有请求完成
   const items = (await Promise.all(promises)).filter(Boolean);
-  return items;
+
+  // 去重：保留第一次出现的 title
+  const seenTitles = new Set();
+  const uniqueItems = items.filter((item) => {
+    if (seenTitles.has(item.title)) {
+      return false;
+    }
+    seenTitles.add(item.title);
+    return true;
+  });
+
+  return uniqueItems;
 }
 
 // 解析豆瓣片单
@@ -725,28 +919,29 @@ async function getPreferenceRecommendations(params = {}) {
         if (!/^\d$/.test(String(rating))) throw new Error("评分必须为 0～9 的整数");
 
         const selectedCategories = {
-            "类型": params.genre || "",
-            "地区": params.region || ""
+            "类型": params.movieGenre || params.tvGenre || params.zyGenre || "",
+            "地区": params.region || "",
+            "形式": params.tvModus || "",
         };
+        console.log("selectedCategories: ", selectedCategories);
 
         const tags_sub = [];
-        if (params.genre) tags_sub.push(params.genre);
+        if (params.movieGenre) tags_sub.push(params.movieGenre);
+        if (params.tvModus && !params.tvGenre && !params.zyGenre) tags_sub.push(params.tvModus);
+        if (params.tvModus && params.tvGenre) tags_sub.push(params.tvGenre);
+        if (params.tvModus && params.zyGenre) tags_sub.push(params.zyGenre);
         if (params.region) tags_sub.push(params.region);
-        if (params.year) {
-            if (params.year.includes("年代")) {
-                tags_sub.push(params.year);
-            } else {
-                tags_sub.push(`${params.year}年`);
-            }
-        }
+        if (params.year) tags_sub.push(params.year);
+        if (params.platform) tags_sub.push(params.platform);
         if (params.tags) {
           const customTagsArray = params.tags.split(',').filter(tag => tag.trim() !== '');
           tags_sub.push(...customTagsArray);
         }
+        console.log("tags_sub: ", tags_sub);
 
         const limit = 20;
         const offset = Number(params.offset);
-        const url = `https://m.douban.com/rexxar/api/v2/${params.mediaType}/recommend?refresh=0&start=${offset}&count=${Number(offset) + limit}&selected_categories=${encodeURIComponent(JSON.stringify(selectedCategories))}&uncollect=false&score_range=${rating},10&tags=${encodeURIComponent(tags_sub.join(","))}&sort=${params.sortBy}`;
+        const url = `https://m.douban.com/rexxar/api/v2/${params.mediaType}/recommend?refresh=0&start=${offset}&count=${Number(offset) + limit}&selected_categories=${encodeURIComponent(JSON.stringify(selectedCategories))}&uncollect=false&score_range=${rating},10&tags=${encodeURIComponent(tags_sub.join(","))}&sort=${params.sort_by}`;
 
         const response = await Widget.http.get(url, {
             headers: {
