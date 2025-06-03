@@ -187,3 +187,23 @@ PlutoTV-美国 (United States)
 类型：动漫/电影/电视剧
 等级：非常好看/好看/一般/烂片
 ```
+
+### 七、追剧日历(今/明日播出、各项榜单、今日推荐)
+<img src="https://i.miji.bid/2025/05/30/be043310fe0e0beefd21a9b92535a4fe.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/30/961b5c41d77f208ce2556738bc84e60d.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/30/7cd063207fad2ff2f873fcd007c5083e.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/30/923ddad8c2e563f09a406b59635056a7.jpeg" style="width:200px" />
+
+#### 今/明日播出
+```shell
+类型：今日播出剧集/今日播出番剧/明日播出剧集/明日播出番剧
+```
+
+#### 各项榜单
+```shell
+类型：现正热播/人气 Top 10/新剧雷达/热门国漫/已收官好剧/华语热门/本季新番
+地区：国产剧/日剧/英美剧/番剧/韩剧/港台剧
+```
+
+#### 今日推荐
+
+### 📈项目 Star 数增长趋势
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=huangxd-/ForwardWidgets&type=Date)](https://www.star-history.com/#huangxd-/ForwardWidgets&Date)
