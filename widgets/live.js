@@ -2,11 +2,13 @@
 WidgetMetadata = {
     id: "live",
     title: "直播(电视+网络)",
+    detailCacheDuration: 60,
     modules: [
         {
             title: "直播(电视+网络)",
             requiresWebView: false,
             functionName: "loadLiveItems",
+            cacheDuration: 21600,
             params: [
                 {
                     name: "url",
@@ -39,8 +41,8 @@ WidgetMetadata = {
                             value: "https://bit.ly/suxuang-v4"
                         },
                         {
-                            title: "feiyang",
-                            value: "https://feiyang.wangdu.site/ALL-Sub.m3u"
+                            title: "123pan",
+                            value: "https://vip.123pan.cn/1814643527/tv/qwt.m3u"
                         },
                         {
                             title: "PlutoTV-美国",
@@ -85,6 +87,10 @@ WidgetMetadata = {
                         {
                             title: "PlutoTV-阿根廷",
                             value: "https://raw.githubusercontent.com/HelmerLuzo/PlutoTV_HL/refs/heads/main/tv/m3u/PlutoTV_tv_AR.m3u"
+                        },
+                        {
+                            title: "全球",
+                            value: "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"
                         },
                         {
                             title: "IPTV1",
@@ -199,7 +205,7 @@ WidgetMetadata = {
             ],
         },
     ],
-    version: "1.0.7",
+    version: "1.0.8",
     requiredVersion: "0.0.1",
     description: "解析直播订阅链接【五折码：CHEAP.5;七折码：CHEAP】",
     author: "huangxd",

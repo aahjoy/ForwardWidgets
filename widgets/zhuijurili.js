@@ -8,6 +8,7 @@ WidgetMetadata = {
             title: "今日播出",
             requiresWebView: false,
             functionName: "loadTmdbItems",
+            cacheDuration: 21600,
             params: [
                 {
                     name: "sort_by",
@@ -40,6 +41,7 @@ WidgetMetadata = {
             title: "明日播出",
             requiresWebView: false,
             functionName: "loadTmdbItems",
+            cacheDuration: 21600,
             params: [
                 {
                     name: "sort_by",
@@ -72,6 +74,7 @@ WidgetMetadata = {
             title: "今日推荐",
             requiresWebView: false,
             functionName: "loadTmdbItems",
+            cacheDuration: 43200,
             params: [
                 {
                     name: "sort_by",
@@ -86,6 +89,7 @@ WidgetMetadata = {
             title: "各项榜单",
             requiresWebView: false,
             functionName: "loadTmdbItems",
+            cacheDuration: 86400,
             params: [
                 {
                     name: "sort_by",
@@ -130,6 +134,7 @@ WidgetMetadata = {
             title: "地区榜单",
             requiresWebView: false,
             functionName: "loadTmdbItems",
+            cacheDuration: 86400,
             params: [
                 {
                     name: "sort_by",
@@ -166,7 +171,7 @@ WidgetMetadata = {
             ],
         },
     ],
-    version: "1.0.2",
+    version: "1.0.3",
     requiredVersion: "0.0.1",
     description: "解析追剧日历今/明日播出剧集/番剧/国漫/综艺、各项榜单、今日推荐等【五折码：CHEAP.5;七折码：CHEAP】",
     author: "huangxd",
@@ -287,7 +292,7 @@ async function fetchDefaultData(sort_by) {
 
 async function fetchOtherData(typ, sort_by) {
     const whichDay = sort_by.includes("今天") ? "today" : "tomorrow";
-    const response = await Widget.http.get(`https://proxy.hxd.ip-ddns.com/https://gist.githubusercontent.com/huangxd-/5ae61c105b417218b9e5bad7073d2f36/raw/${typ}_${whichDay}.json`, {
+    const response = await Widget.http.get(`https://gist.githubusercontent.com/huangxd-/5ae61c105b417218b9e5bad7073d2f36/raw/${typ}_${whichDay}.json`, {
         headers: {
             "User-Agent":
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
