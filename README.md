@@ -8,6 +8,10 @@
   七折码：CHEAP
 </p>
 
+以下插件纯属个人爱好，侵删谢谢。
+
+纯为爱发电，模块只是自己要用，然后顺便分享，如果真要打赏，可以支付宝发口令红包到我的tg私信机器人 https://t.me/ddjdd_bot ，感谢😊
+
 ### 一、豆瓣我看&豆瓣个性化推荐
 
 <img src="https://i.miji.bid/2025/05/05/ee9c89a97e226fa0cebaae2990b13836.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/d1b4ddc054156a87ccd1a4bff8197b53.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/ffee8bded4b121831d1b8da95c047bb9.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/ad56685688d7cd354b6cfcbed97b3e09.jpeg" style="width:200px" />
@@ -253,13 +257,88 @@ PlutoTV-美国 (United States)
 使用方法请前往 https://t.me/ForwardWidgets/288 观看
 
 #### 自定义服务器
-从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
+从哪个服务器获取弹幕，默认是http://127.0.0.1
 ```shell
+http://127.0.0.1
 https://fc.lyz05.cn
 https://danmu.56uxi.com
 https://dmku.hls.one
 https://api.danmu.icu
 https://se.678.ooo
+https://dm.lxlad.com
+```
+
+弹幕服务器新增localhost http://127.0.0.1 ，弹幕下载会直接请求各平台（搬迁修改自 https://github.com/lyz05/danmaku ），支持爱优腾芒哔，相对原来直接请求三方弹幕服务器会相对更稳定一点
+
+其中爱平台下载弹幕的时候需要zlib解压，fw的widget.http.get不支持返回arrayBuffer，没找到好的解决办法，所以当前先用cloudflare转了一下，worker.js如下：
+```js
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+  try {
+    // Extract URL from query parameter
+    const url = new URL(request.url).searchParams.get('url');
+    if (!url) {
+      return new Response('Missing URL parameter', { status: 400 });
+    }
+
+    // Fetch the compressed data from the provided URL
+    const response = await fetch(url);
+    if (!response.ok) {
+      return new Response(`Failed to fetch URL: ${response.statusText}`, { status: response.status });
+    }
+
+    // Get the response body as an ArrayBuffer
+    const compressedData = await response.arrayBuffer();
+
+    // Decompress the zlib-compressed data
+    const decompressedData = await decompress(compressedData);
+
+    // Convert decompressed data to text
+    const text = new TextDecoder().decode(decompressedData);
+
+    // Return the decompressed data
+    return new Response(text, {
+      status: 200,
+      headers: { 'Content-Type': 'text/plain' }
+    });
+  } catch (error) {
+    return new Response(`Error: ${error.message}`, { status: 500 });
+  }
+}
+
+// Decompress zlib data using Web Crypto API
+async function decompress(data) {
+  const stream = new ReadableStream({
+    start(controller) {
+      controller.enqueue(new Uint8Array(data));
+      controller.close();
+    }
+  });
+
+  const decompressedStream = stream.pipeThrough(new DecompressionStream('deflate'));
+  const reader = decompressedStream.getReader();
+  const chunks = [];
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+  }
+
+  // Combine chunks into a single Uint8Array
+  const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+  const result = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const chunk of chunks) {
+    result.set(chunk, offset);
+    offset += chunk.length;
+  }
+
+  return result;
+}
 ```
 
 #### 各大平台播放链接输入示例
@@ -290,17 +369,26 @@ https://m.iqiyi.com/v_1ftv9n1m3bg.html
 综艺是根据集发布日期和集标题匹配的播放链接，所以如果emby刮削不准确或者360kan平台没有该综艺都会匹配不到
 
 #### 自定义弹幕服务器
-从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
+从哪个服务器获取弹幕，默认是http://127.0.0.1
 ```shell
+http://127.0.0.1
 https://fc.lyz05.cn
 https://danmu.56uxi.com
 https://dmku.hls.one
 https://api.danmu.icu
 https://se.678.ooo
+https://dm.lxlad.com
 ```
+
+弹幕服务器新增localhost http://127.0.0.1 ，弹幕下载会直接请求各平台（搬迁修改自 https://github.com/lyz05/danmaku ），支持爱优腾芒哔，相对原来直接请求三方弹幕服务器会相对更稳定一点
+
+其中爱平台下载弹幕的时候需要zlib解压，fw的widget.http.get不支持返回arrayBuffer，没找到好的解决办法，所以当前先用cloudflare转了一下
 
 #### 弹幕服务器轮询开关
 设置的弹幕服务器下载弹幕失败的情况下轮询其他弹幕服务器
+
+#### 跳过360kan站点查询开关
+默认关闭，打开的情况下会跳过360kan站点查询，直接请求vod站点
 
 #### 电影弹幕优先平台
 新增电影弹幕优先平台，用于控制从哪个平台下载电影弹幕，默认随机，且如果指定的平台在返回数据中不存在，则随机
@@ -313,6 +401,12 @@ https://se.678.ooo
 
 #### debug开关
 新增debug开关，默认关闭，打开的状态下会在开头2分钟内打印错误日志弹幕
+
+#### 弹幕API
+支持5个弹幕API填写，弹幕链接获取失败后，会依次轮询弹幕API，以获取韩剧/美剧等
+
+#### 弹幕API优先开关
+优先请求弹幕API获取弹幕 (开启后准确性可能没有通过链接匹配的高)
 
 ### 各插件刷新时间列表
 ```shell
